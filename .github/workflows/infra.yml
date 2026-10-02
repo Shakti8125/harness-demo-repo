@@ -1,0 +1,18 @@
+name: infra
+on:
+  workflow_dispatch:
+    inputs:
+      index_url:
+        description: "package index (the default is unreachable on purpose)"
+        default: "https://pypi.invalid/simple"
+        type: string
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install --index-url "${{ inputs.index_url }}" --timeout 15 --retries 1 -r requirements.txt -r requirements-dev.txt
+      - run: pytest -v tests/test_pricing.py
