@@ -10,3 +10,6 @@ Seeded by `scripts/seed_demo_repo.sh` of the agent harness. Four workflows, four
 | `dependency.yml` | pushed on `demo/dependency`: `pydantic` 1.10.13 -> 2.9.2 moves `BaseSettings` | `dependency_break` |
 
 Nothing here is real software; every failure is on purpose.
+
+The flaky scenario needs its green baseline on an earlier commit than the failure: the
+harness never uses a passing run on the failing commit itself as a baseline.
